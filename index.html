@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDR kainos skaičiuoklė</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  select, input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+  }
+  .result {
+    margin-top: 25px;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    font-size: 22px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>PDR kainos skaičiuoklė</h1>
+
+<label>Duobutės dydis</label>
+<select id="size">
+  <option value="20">Iki 1 cm</option>
+  <option value="35">1–3 cm</option>
+  <option value="55">3–5 cm</option>
+  <option value="95">5–10 cm</option>
+  <option value="120">Virš 10 cm</option>
+</select>
+
+<label>Vieta</label>
+<select id="place">
+  <option value="0">Durys / Sparnas</option>
+  <option value="30">Kėbulo linija</option>
+  <option value="30">Arka</option>
+  <option value="40">Stogas</option>
+  <option value="50">Statramstis</option>
+</select>
+
+<label>Sudėtingumas</label>
+<select id="complexity">
+  <option value="0">Standartinė</option>
+  <option value="40">Gilus lūžis</option>
+  <option value="60">Aliuminis</option>
+  <option value="40">Reikia ardyti</option>
+</select>
+
+<label>Kiekis</label>
+<input type="number" id="qty" value="1" min="1">
+
+<div class="result">
+  Galutinė kaina: <span id="price">0</span> €
+</div>
+
+<script>
+function calculate() {
+  const size = parseInt(document.getElementById("size").value);
+  const place = parseInt(document.getElementById("place").value);
+  const complexity = parseInt(document.getElementById("complexity").value);
+  const qty = parseInt(document.getElementById("qty").value);
+
+  const total = (size + place + complexity) * qty;
+  document.getElementById("price").innerText = total;
+}
+
+document.querySelectorAll("select, input").forEach(el => {
+  el.addEventListener("change", calculate);
+});
+
+calculate();
+</script>
+
+</body>
+</html>
